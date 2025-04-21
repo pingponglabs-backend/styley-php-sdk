@@ -12,7 +12,7 @@ class DeploymentsTest extends TestCase
     public function testCreate()
     {
         $httpClient = $this->createMock(HttpClient::class);
-        $deploymentInput = new DeploymentInput('deployment_name', 'model_id', []);
+        $deploymentInput = new DeploymentInput('deployment_name', 'model_id', [], 'png', output_width: '1024', output_height: '1024');
         $response = [
             'name' => 'deployment_name',
             'model_id' => 'model_id',

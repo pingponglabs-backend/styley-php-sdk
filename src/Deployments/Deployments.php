@@ -79,8 +79,8 @@ class Deployments
                 $responseData['job_id'],
             );
             
-            if (isset($response['job']['eta']) && $response['job']['eta'] !== null) {
-                $eta = $response['job']['eta'];
+            if (isset($responseData['job']['eta']) && $responseData['job']['eta'] !== null) {
+                $eta = $responseData['job']['eta'];
             } else {
                 $eta = ETA;
             }
@@ -91,14 +91,18 @@ class Deployments
             while ($status !== COMPLETE && $status !== FAILED && $eta > 0) {
                 sleep(10);
                 $jobData = $this->client->get("/api/v1/jobs/" . $jobId);
-                $jobData = $responseData['job'] ?? [];
+                // $jobData = $responseData['job'] ?? [];
                 $jobId = isset($jobData['id']) && is_string($jobData['id']) ? $jobData['id'] : null;
                 // print_r($jobData);
                 $job = new Job(
+                    $jobData['id'] ?? null,
+                    $jobData['status'] ?? "",
+                    $jobData['deployment_id'] ?? 0,
+                    $jobData['args'] ?? null,
                     $jobData['files'] ?? null,
-                    $jobData['credits_used'] ?? 0,
-                    $jobData['eta'] ?? 0,
-                    $jobData['status'] ?? ""
+                    $jobData['created_at'] ?? null,
+                    creditsUsed: $jobData['credits_used'] ?? 0,
+                    eta: $jobData['eta'] ?? 0,
                 );
 
                 $status = $jobData['status'];
