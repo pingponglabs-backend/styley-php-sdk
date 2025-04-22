@@ -3,8 +3,6 @@
 use \Styley\Deployments\Deployments;
 use \Styley\Client;
 
-require '../vendor/autoload.php';
-
 $client = new Client();
 $res = $client->deployments->create(
     new \Styley\Deployments\DeploymentInput(

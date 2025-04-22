@@ -6,8 +6,6 @@ use Styley\Deployments\Deployments;
 use Styley\HttpClient\HttpClient;
 use Styley\Models\Models;
 
-require '../vendor/autoload.php';
-
 class Client
 {
     public Deployments $deployments;

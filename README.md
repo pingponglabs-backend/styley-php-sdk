@@ -100,25 +100,34 @@ This guide demonstrates how to initialize the SDK and interact with the availabl
 
 # 🏆 **Deployments**
 ### 📤 Create Deployment
-This method creates a new deployment using the specified model ID, name, and arguments.
+
+The **Create Deployment** method allows you to create a new deployment using a `model name` and `arguments`. It returns an output with a `job_id` that you can use to fetch the final results.
+
+**Additional Parameters:**
+
+- **output_format** (str, optional): Output format for the result.
+  - Images: `png`, `jpg`, `jpeg`, `gif`, `bmp`, `tiff`, `webp`, `ico`
+  - Videos: `mp4`, `webm`, `mkv`, `mov`, `avi`
+
+- **output_width** (int, optional): Output image width in pixels (positive integer)
+- **output_height** (int, optional): Output image height in pixels (positive integer)
+
+Note: For image resizing, both width and height must be specified together. If only one dimension is provided, the original image size will be maintained.
+
 ```php
 use \Styley\Client;
 
 $client = new Client();
 $createdeployment = $client->deployments->create(
     new DeploymentInput(
-        "Property Details and Maps",
-        "6db33e45-29cf-4880-8ee0-3d9074c32e5e",
+        "Background Removal",
+        "844218fa-c5d0-4cee-90ce-0b42d226ac8d",
         [
-            "City" => "Arlington",
-            "State" => "VA",
-            "Basement" => true,
-            "Number of BathRoom" => 1,
-            "Number of BedRoom" => 1,
-            "Garage" => false,
-            "Stories" => 1,
-            "Pool" => false
-        ]
+            "input" => "https://cdn.mediamagic.dev/media/799f2adc-384e-11ed-8158-e679ed67c206.jpeg"
+        ],
+        "png",
+        1024,
+        1024
     )
 );
 ```

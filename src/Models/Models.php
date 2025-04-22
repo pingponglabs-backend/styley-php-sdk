@@ -5,8 +5,6 @@ namespace Styley\Models;
 use GuzzleHttp\Exception\GuzzleException;
 use Styley\HttpClient\HttpClient;
 
-require '../vendor/autoload.php';
-
 class Models
 {
     private HttpClient $client;

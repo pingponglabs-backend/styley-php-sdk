@@ -6,8 +6,6 @@ use GuzzleHttp;
 use GuzzleHttp\Client;
 use mysql_xdevapi\Exception;
 
-require '../vendor/autoload.php';
-
 class HttpClient
 {
     private Client $client;

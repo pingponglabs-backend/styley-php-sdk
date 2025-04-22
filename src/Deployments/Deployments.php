@@ -6,8 +6,6 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Styley\HttpClient\HttpClient;
 
-require '../vendor/autoload.php';
-
 const COMPLETE = 'complete';
 const FAILED = 'failed';
 const ETA = 180;
