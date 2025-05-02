@@ -121,7 +121,28 @@ export X_STYLEY_KEY="your-api-key-here"
 
 The **Create Deployment** method allows you to create a new deployment using a `model name` and `arguments`. It returns an output with a `job_id` that you can use to fetch the final results.
 
-**Additional Parameters:**
+```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use \Styley\Client;
+use \Styley\Deployments\DeploymentInput;
+
+$client = new Client();
+$createdeployment = $client->deployments->create(
+    new DeploymentInput(
+        "Background Removal",
+        "844218fa-c5d0-4cee-90ce-0b42d226ac8d",
+        [
+            "input" => "https://cdn.mediamagic.dev/media/799f2adc-384e-11ed-8158-e679ed67c206.jpeg"
+        ]
+    )
+);
+echo "Deployment created:\n";
+echo json_encode($createdeployment, JSON_PRETTY_PRINT); 
+```
+
+**With Additional Parameters:**
 
 - **output_format** (str, optional): Output format for the result.
   - Images: `png`, `jpg`, `jpeg`, `gif`, `bmp`, `tiff`, `webp`, `ico`
