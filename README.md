@@ -89,14 +89,32 @@ Create a composer.json file in the project directory:
 touch composer.json
 ```
 
+Add the below content into `composer.json`
+```json
+{
+  "name": "your-project-name",
+  "require": {}
+}
+```
+
 ## 📦 Installation
 Install the Styley PHP SDK via Composer.
 
 ```bash
-composer require styley/styley-php-sdk
+composer require styley/styley-php-sdk:dev-main
 ```
 ## ⚙️ Usage
 This guide demonstrates how to initialize the SDK and interact with the available methods for deployments and models.
+
+## 🌐 Set `X_STYLEY_KEY` Environment Variable
+### PowerShell
+```powershell
+$env:X_STYLEY_KEY = "your-api-key-here"
+```
+### Bash
+```bash
+export X_STYLEY_KEY="your-api-key-here"
+```
 
 # 🏆 **Deployments**
 ### 📤 Create Deployment
@@ -115,7 +133,11 @@ The **Create Deployment** method allows you to create a new deployment using a `
 Note: For image resizing, both width and height must be specified together. If only one dimension is provided, the original image size will be maintained.
 
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use \Styley\Client;
+use \Styley\Deployments\DeploymentInput;
 
 $client = new Client();
 $createdeployment = $client->deployments->create(
@@ -130,58 +152,96 @@ $createdeployment = $client->deployments->create(
         1024
     )
 );
+echo "Deployment created:\n";
+echo json_encode($createdeployment, JSON_PRETTY_PRINT); 
 ```
 
 ## 📄 **Get Deployment By ID**
 Retrieve deployment details by ID.
 
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use \Styley\Client;
+use \Styley\Deployments\Deployments;
 
 $client = new Client();
 
-// <job_id> - replace with actual jobID from Deployement response
-$deployment = $client->deployments->getById("<deployment_id>");
+// Replace with actual deployment_id from deployment response
+$deployment = $client->deployments->getById("deployment_id");
+
+echo "Deployment details retrieved:\n";
+echo json_encode($deployment, JSON_PRETTY_PRINT);
 ```
 
 ## 📜 **Get Job**
 Retrieve the status of a deployment job using its job ID.
 
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use \Styley\Client;
 
 $client = new Client();
 
-// <job_id> - replace with actual jobID from Deployement response
-$jobStatus = $client->deployments->getJob("<job_id>");
+// Replace with actual job_id from Deployement response
+$jobStatus = $client->deployments->getJob("job_id");
+
+echo "Job status retrieved:\n";
+echo json_encode($jobStatus, JSON_PRETTY_PRINT);
 ```
 
 # ⚡**Models**
-
 ## 📜**List Models**
 Retrieve a list of all models available for deployments.
 
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use \Styley\Client;
 
+$client = new Client();
+
 $models = $client->models->list();
+
+echo "Models retrieved:\n";
+echo json_encode($models, JSON_PRETTY_PRINT);
 ```
 
 ## 🔍 **Get Model By ID**
 Fetch model details using its model ID.
 
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use \Styley\Client;
 
-$model = $client->models->getById("6db33e45-29cf-4880-8ee0-3d9074c32e5e");
+$client = new Client();
+
+$model = $client->models->getById("model_id");
+
+echo "Model retrieved:\n";
+echo json_encode($model, JSON_PRETTY_PRINT);
 ```
 ## 🔍 **Get Model By Name**
 Fetch model details using its name.
 
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use \Styley\Client;
 
-$model = $client->models->getByName("Property Details and Maps");
+$client = new Client();
+
+$model = $client->models->getByName("Virtual Staging Fast");
+
+echo "Model retrieved:\n";
+echo json_encode($model, JSON_PRETTY_PRINT);
 ```
 ## 📘 **Summary of Available Methods**
 
