@@ -11,9 +11,9 @@ class DeploymentInput implements Mappable
         public string $name,
         public string $model_id,
         public array $args,
-        public string $output_format,
-        public int $output_width,
-        public int $output_height,
+        public ?string $output_format = null,
+        public ?int $output_width = null,
+        public ?int $output_height = null,
     ) {}
 
     public function toMap(): array
